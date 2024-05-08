@@ -2,13 +2,11 @@
 
 const Czas =  props => {
 
-    const timer = () => { 
-       new Date()
-    }
+    
     return (
-      <div>
-        {timer}
-      </div>
+      <button onClick={props.action}>
+        {props.children}
+      </button>
     );
  
 }
