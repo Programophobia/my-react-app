@@ -15,6 +15,17 @@ const getPrice = (basePrice, currentSize) => {
   return basePrice + currentSize.additionalPrice;
 }
 
+const sentOrder = (event, title, basePrice, currentSize, currentColor) => {
+  event.preventDefault();
+  console.log(`
+    Name: ${title}
+    Price: ${getPrice(basePrice, currentSize)}
+    Size: ${currentSize.name}
+    Color: ${currentColor}
+  `);
+  setCurrentColor(props.colors[0]);
+  setCurrentSize(props.sizes[0]);
+};
   return (
     <article className={styles.product}>
       <div className={styles.imageContainer}>
@@ -30,19 +41,19 @@ const getPrice = (basePrice, currentSize) => {
         </header>
         <form>
           <div className={styles.sizes}>
-            <h3 className={styles.optionLabel}>Sizes</h3>
+            <h3 className={styles.optionLabel} alt={props.names}>Sizes</h3>
             <ul className={styles.choices}>
-             {props.sizes.map(size => <li><button type="button" className={clsx(size===currentSize&&styles.active)} onClick={()=>setCurrentSize(size)}>{size.name}</button></li>)}
+             {props.sizes.map(size => <li><button type="button" key={size.name} className={clsx(size===currentSize&&styles.active)} onClick={()=>setCurrentSize(size)}>{size.name}</button></li>)}
             </ul>
           </div>
           <div className={styles.colors}>
             <h3 className={styles.optionLabel}>Colors</h3>
             <ul className={styles.choices}>
-            {props.colors.map( color => <li><button onClick={()=>setCurrentColor(color)} type="button" className={clsx(prepareColorClassName(color), color===currentColor&&styles.active)} /></li>)}
+            {props.colors.map( color => <li><button  key={color} onClick={()=>setCurrentColor(color)} type="button" className={clsx(prepareColorClassName(color), color===currentColor&&styles.active)} /></li>)}
               
             </ul>
           </div>
-          <Button className={styles.button}>
+          <Button className={styles.button} onClick={ (event) => sentOrder(event, props.title, props.basePrice, currentSize, currentColor)}>
             <span className="fa fa-shopping-cart" />
           </Button>
         </form>
