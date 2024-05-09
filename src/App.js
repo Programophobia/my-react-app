@@ -1,19 +1,15 @@
+import Products from './components/Products/Products';
+import Header from './components/Header/Header';
+import Container from './components/Container/Container';
 
-import './App.css';
-import Czas from './czas.js';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
- const App = () => {
-  const current = new Date();
-  const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+const App = () => {
 
   return (
-    <div className="App">
-      <h1>Current date is {date}</h1>
-    </div>
+    <Container>
+      <Header />
+      <Products />
+    </Container>
   );
- }
+}
+
 export default App;
-
-
